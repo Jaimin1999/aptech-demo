@@ -4,6 +4,8 @@ import ProtectedRoute from "./lib/AuthContext/ProtectedRoute";
 import { Login } from "./pages";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { ThemeProvider } from "./lib/ThemeContext/ThemeContext";
+import UsersPage from "./pages/Users/Users";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   return (
@@ -44,7 +46,7 @@ function App() {
                 path="/users"
                 element={
                   <ProtectedRoute>
-                    <Dashboard />
+                    <UsersPage />
                   </ProtectedRoute>
                 }
               />
@@ -52,7 +54,7 @@ function App() {
                 path="/settings"
                 element={
                   <ProtectedRoute>
-                    <Dashboard />
+                    <Settings />
                   </ProtectedRoute>
                 }
               />

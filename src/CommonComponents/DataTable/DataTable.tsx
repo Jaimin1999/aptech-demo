@@ -24,6 +24,7 @@ interface DataTableProps<TData, TValue> {
     pagination?: boolean
     pageSizeOptions?: number[]
     defaultPageSize?: number
+    onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -33,6 +34,7 @@ export function DataTable<TData, TValue>({
     pagination = false,
     pageSizeOptions = [5, 10, 20, 30, 50],
     defaultPageSize = 5,
+    onRowClick,
 }: DataTableProps<TData, TValue>) {
     const tableColumns = allowCheckbox
         ? [
@@ -102,6 +104,8 @@ export function DataTable<TData, TValue>({
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
+                                    className="cursor-pointer"
+                                    onClick={() => onRowClick?.(row.original)}
                                     data-state={row.getIsSelected() && "selected"}
                                 >
                                     {row.getVisibleCells().map((cell) => (

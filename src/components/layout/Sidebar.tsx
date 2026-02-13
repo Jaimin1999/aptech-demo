@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
     LayoutDashboard,
@@ -7,13 +7,10 @@ import {
     Settings,
     Menu,
     LogOut,
-    Sun,
-    Moon,
 } from "lucide-react";
 
 import { Button } from "@/components";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/lib/ThemeContext/ThemeContext";
 import { useAuth } from "@/lib/AuthContext";
 import { ConfirmDialog } from "@/CommonComponents";
 
@@ -30,7 +27,6 @@ const NAV_ITEMS = [
 
 export function SidebarLayout({ children }: SidebarLayoutProps) {
 
-    const saved = localStorage.getItem("sidebar-collapsed");
 
     const [collapsed, setCollapsed] = useState<boolean>(() => {
         const saved = localStorage.getItem("sidebar-collapsed");
@@ -38,7 +34,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
     });
     const [isLogoutOpen, setIsLogoutOpen] = useState(false);
 
-    const { theme, toggleTheme } = useTheme();
+
     const { logout } = useAuth();
 
     const toggleSidebar = () => {
@@ -95,19 +91,7 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
 
                 {/* Bottom Section */}
                 <div className="mt-auto border-t p-2 space-y-1">
-                    {/* Theme Toggle */}
-                    <Button
-                        variant="ghost"
-                        className="w-full justify-start gap-3"
-                        onClick={toggleTheme}
-                    >
-                        {theme === "dark" ? (
-                            <Moon className="h-4 w-4" />
-                        ) : (
-                            <Sun className="h-4 w-4" />
-                        )}
-                        {!collapsed && <span>Toggle Theme</span>}
-                    </Button>
+
 
                     {/* Logout */}
                     <Button
